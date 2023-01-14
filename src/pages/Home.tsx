@@ -4,7 +4,12 @@ import FilterForm from "../components/FilterForm";
 
 function Home() {
   return (
-    <Container sx={{ padding: "50px 75px" }}>
+    <Container
+      maxWidth={false}
+      fixed
+      disableGutters={true}
+      sx={{ paddingBlock: 6.25, width: "1440px", paddingInline: "75px" }}
+    >
       <FilterForm />
       <Articles />
     </Container>

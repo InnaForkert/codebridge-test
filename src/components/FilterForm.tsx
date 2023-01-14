@@ -33,7 +33,10 @@ function FilterForm() {
           value={filterValue}
           startAdornment={<SearchIcon />}
           placeholder="The most successful IT companies in 2020"
-          sx={{ width: "600px" }}
+          sx={{
+            width: "600px",
+            boxShadow: "0px 8px 24px rgba(0, 0, 0, 0.05)",
+          }}
         />
       </Grid>
     </Grid>

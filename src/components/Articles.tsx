@@ -3,7 +3,9 @@ import { useAppDispatch, useAppSelector } from "../state/utils/hooks";
 import { fetchArticles } from "../state/utils/getArticles";
 import Article from "./Article";
 import { nanoid } from "nanoid";
-import { ArticlesInterface, ArticleInterface } from "../interfaces/interfaces";
+import { ArticleInterface } from "../interfaces/interfaces";
+import Grid from "@mui/material/Grid";
+import Divider from "@mui/material/Divider";
 
 function Articles() {
   const dispatch = useAppDispatch();
@@ -20,12 +22,17 @@ function Articles() {
   return (
     <>
       <p>Results: 6</p>
+      <Divider />
       {isError && <p>Oops! Something went wrong! 🤔</p>}
       {isLoading && <p>Loading...</p>}
-      {articles &&
-        articles.data.map((el: ArticleInterface) => (
-          <Article key={nanoid()} data={el} />
-        ))}
+      <Grid container rowSpacing={"45px"} justifyContent="space-between">
+        {articles &&
+          articles.data.map((el: ArticleInterface) => (
+            <Grid item key={nanoid()}>
+              <Article data={el} />
+            </Grid>
+          ))}
+      </Grid>
     </>
   );
 }
