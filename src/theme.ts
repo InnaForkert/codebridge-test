@@ -5,6 +5,9 @@ export const theme = createTheme({
     fontFamily: ["Montserrat", "sans-serif"].join(","),
   },
   palette: {
+    primary: {
+      main: "#363636",
+    },
     secondary: {
       main: "rgba(54,54,54, 0.6)",
     },

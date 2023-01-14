@@ -46,7 +46,14 @@ function Article({ data }: { data: ArticleInterface }) {
         <Typography
           component={Link}
           to={`/article/${data.id}`}
-          sx={{ position: "absolute", bottom: "25px", left: "25px" }}
+          fontWeight={700}
+          sx={{
+            position: "absolute",
+            bottom: "25px",
+            left: "25px",
+            textDecoration: "none",
+            color: (theme) => theme.palette.primary.main,
+          }}
         >
           Read more
         </Typography>
