@@ -6,6 +6,7 @@ import { nanoid } from "nanoid";
 import { ArticleInterface } from "../interfaces/interfaces";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
+import { Typography } from "@mui/material";
 
 function Articles() {
   const dispatch = useAppDispatch();
@@ -21,11 +22,18 @@ function Articles() {
 
   return (
     <>
-      <p>Results: 6</p>
+      <Typography fontWeight={600} mt={5}>
+        Results: 6
+      </Typography>
       <Divider />
       {isError && <p>Oops! Something went wrong! 🤔</p>}
       {isLoading && <p>Loading...</p>}
-      <Grid container rowSpacing={"45px"} justifyContent="space-between">
+      <Grid
+        container
+        rowSpacing={"45px"}
+        justifyContent="space-between"
+        mt={6.25}
+      >
         {articles &&
           articles.data.map((el: ArticleInterface) => (
             <Grid item key={nanoid()}>
