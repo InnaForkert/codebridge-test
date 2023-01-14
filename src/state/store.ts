@@ -9,6 +9,13 @@ const rootReducer = combineReducers({
 
 export const store = configureStore({
   reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ["articles/fetch/fulfilled"],
+        ignoredPaths: ["articles.articles"],
+      },
+    }),
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
