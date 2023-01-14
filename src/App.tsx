@@ -3,14 +3,14 @@ import "./App.css";
 import { Route, Routes } from "react-router";
 
 const Home = lazy(() => import("./pages/Home"));
-const Article = lazy(() => import("./pages/Article"));
+const ArticlePage = lazy(() => import("./pages/ArticlePage"));
 
 function App() {
   return (
     <Suspense>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/atricles/:articleId" element={<Article />} />
+        <Route path="/atricles/:articleId" element={<ArticlePage />} />
       </Routes>
     </Suspense>
   );

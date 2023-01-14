@@ -12,7 +12,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter basename="codebridge-test">
+      <BrowserRouter
+      // basename="codebridge-test"
+      >
         <App />
       </BrowserRouter>
     </Provider>
