@@ -29,7 +29,12 @@ function Article({
   return (
     <Card
       variant="outlined"
-      sx={{ width: 400, height: "530px", position: "relative" }}
+      sx={{
+        width: 400,
+        height: "530px",
+        position: "relative",
+        boxShadow: "0px 8px 24px rgba(0, 0, 0, 0.05)",
+      }}
     >
       <CardMedia
         component="img"
@@ -37,7 +42,6 @@ function Article({
         alt={title}
         width="400"
         height="217"
-        sx={{ boxShadow: "0px 8px 24px rgba(0, 0, 0, 0.05)" }}
       />
       <CardContent sx={{ padding: "16px 24px" }}>
         <Typography

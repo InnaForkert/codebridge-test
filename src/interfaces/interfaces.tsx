@@ -22,3 +22,9 @@ export interface ArticleInterface {
 export interface ArticlesInterface {
   data: ArticleInterface[];
 }
+
+// export interface SingleArticleInterface {
+//   imageUrl: string;
+//   summary: string;
+//   title: string;
+// }
