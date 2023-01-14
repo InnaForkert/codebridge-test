@@ -1,24 +1,42 @@
+import {
+  Box,
+  Container,
+  Grid,
+  OutlinedInput,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { setFilter } from "../state/features/filter";
 import { useAppDispatch, useAppSelector } from "../state/utils/hooks";
+import SearchIcon from "@mui/icons-material/Search";
 
 function FilterForm() {
   const dispatch = useAppDispatch();
   const filterValue = useAppSelector((state) => state.filter);
 
-  function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleInput(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
     dispatch(setFilter(e.target.value));
   }
 
   return (
-    <label>
-      Filter by keywords
-      <input
-        type="text"
-        placeholder="The most successful IT companies in 2020"
-        onChange={(e) => handleInput(e)}
-        value={filterValue}
-      />
-    </label>
+    <Grid container direction="column">
+      <Grid item>
+        <Typography fontWeight={600} mb={"10px"}>
+          Filter by keywords
+        </Typography>
+      </Grid>
+      <Grid item>
+        <OutlinedInput
+          onChange={(e) => handleInput(e)}
+          value={filterValue}
+          startAdornment={<SearchIcon />}
+          placeholder="The most successful IT companies in 2020"
+          sx={{ width: "600px" }}
+        />
+      </Grid>
+    </Grid>
   );
 }
 
