@@ -6,10 +6,25 @@ import { format } from "date-fns";
 import { CardContent, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
+import EastIcon from "@mui/icons-material/East";
 
-function Article({ data }: { data: ArticleInterface }) {
-  const theme = useTheme();
-  const formatedDate = format(new Date(data.publishedAt), "PPP");
+function Article({
+  data: { publishedAt, title, summary, imageUrl, id },
+}: {
+  data: ArticleInterface;
+}) {
+  const themeType = useTheme();
+  const formatedDate = format(new Date(publishedAt), "PPP");
+  const formattedSummary = formatSummary();
+
+  function formatSummary() {
+    const breakPoint = title.length > 80 ? 75 : 100;
+    if (summary.length < breakPoint) {
+      return summary;
+    }
+    const lastSpace = summary.slice(0, breakPoint).split("").lastIndexOf(" ");
+    return summary.slice(0, lastSpace) + "...";
+  }
 
   return (
     <Card
@@ -18,8 +33,8 @@ function Article({ data }: { data: ArticleInterface }) {
     >
       <CardMedia
         component="img"
-        image={data.imageUrl}
-        alt={data.title}
+        image={imageUrl}
+        alt={title}
         width="400"
         height="217"
         sx={{ boxShadow: "0px 8px 24px rgba(0, 0, 0, 0.05)" }}
@@ -27,7 +42,7 @@ function Article({ data }: { data: ArticleInterface }) {
       <CardContent sx={{ padding: "16px 24px" }}>
         <Typography
           variant="body2"
-          color={(theme) => theme.palette.secondary.main}
+          color={(theme: typeof themeType) => theme.palette.secondary.main}
           mb={3}
           sx={{ display: "flex", alignItems: "center", gap: "5px" }}
         >
@@ -40,12 +55,12 @@ function Article({ data }: { data: ArticleInterface }) {
           mb={"20px"}
           sx={{ lineHeight: 1.2 }}
         >
-          {data.title}
+          {title}
         </Typography>
-        <Typography>{data.summary}</Typography>
+        <Typography>{formattedSummary}</Typography>
         <Typography
           component={Link}
-          to={`/article/${data.id}`}
+          to={`/article/${id}`}
           fontWeight={700}
           sx={{
             position: "absolute",
@@ -53,9 +68,12 @@ function Article({ data }: { data: ArticleInterface }) {
             left: "25px",
             textDecoration: "none",
             color: (theme) => theme.palette.primary.main,
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
           }}
         >
-          Read more
+          Read more <EastIcon />
         </Typography>
       </CardContent>
     </Card>
@@ -63,49 +81,3 @@ function Article({ data }: { data: ArticleInterface }) {
 }
 
 export default Article;
-
-{
-  /* <Card variant="outlined" sx={{ width: 320 }}>
-  <CardOverflow>
-    <AspectRatio ratio="2">
-      <img
-        src="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318"
-        srcSet="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318&dpr=2 2x"
-        loading="lazy"
-        alt=""
-      />
-    </AspectRatio>
-  </CardOverflow>
-  <Typography level="h2" sx={{ fontSize: "md", mt: 2 }}>
-    Yosemite National Park
-  </Typography>
-  <Typography level="body2" sx={{ mt: 0.5, mb: 2 }}>
-    California
-  </Typography>
-  <Divider />
-  <CardOverflow
-    variant="soft"
-    sx={{
-      display: "flex",
-      gap: 1.5,
-      py: 1.5,
-      px: "var(--Card-padding)",
-      bgcolor: "background.level1",
-    }}
-  >
-    <Typography
-      level="body3"
-      sx={{ fontWeight: "md", color: "text.secondary" }}
-    >
-      6.3k views
-    </Typography>
-    <Divider orientation="vertical" />
-    <Typography
-      level="body3"
-      sx={{ fontWeight: "md", color: "text.secondary" }}
-    >
-      1 hour ago
-    </Typography>
-  </CardOverflow>
-</Card>; */
-}

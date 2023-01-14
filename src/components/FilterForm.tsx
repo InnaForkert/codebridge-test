@@ -1,11 +1,4 @@
-import {
-  Box,
-  Container,
-  Grid,
-  OutlinedInput,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Grid, OutlinedInput, Typography } from "@mui/material";
 import { setFilter } from "../state/features/filter";
 import { useAppDispatch, useAppSelector } from "../state/utils/hooks";
 import SearchIcon from "@mui/icons-material/Search";

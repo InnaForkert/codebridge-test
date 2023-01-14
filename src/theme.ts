@@ -13,3 +13,5 @@ export const theme = createTheme({
     },
   },
 });
+
+export const ThemeType = typeof theme;
