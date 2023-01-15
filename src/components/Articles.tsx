@@ -17,9 +17,10 @@ function Articles() {
   const isError = useAppSelector((state) => state.articles.error);
   const isLoading = useAppSelector((state) => state.articles.isLoading);
   const filter = useAppSelector((state) => state.filter);
-  const { data: count } = useFetchCount(
+  const [url, setUrl] = useState(
     "https://api.spaceflightnewsapi.net/v3/articles/count"
   );
+  const { data: count } = useFetchCount(url);
   const [page, setPage] = useState(1);
 
   const hasMore = count - page * 12 > 0;
@@ -31,12 +32,15 @@ function Articles() {
   useEffect(() => {
     setPage(1);
     dispatch(clearArticles());
+    setUrl(
+      `https://api.spaceflightnewsapi.net/v3/articles/count?title_contains=${filter}`
+    );
   }, [dispatch, filter]);
 
   return (
     <>
       <Typography fontWeight={600} mt={5}>
-        Results: {count}
+        Results: {hasMore ? count : articles.length}
       </Typography>
       <Divider />
       {isError && <p>Oops! Something went wrong! 🤔</p>}

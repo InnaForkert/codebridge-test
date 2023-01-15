@@ -10,23 +10,25 @@ export const fetchArticles = createAsyncThunk(
     if (filter) {
       try {
         const response = await axios.get(
-          `https://api.spaceflightnewsapi.net/v3/articles?title_contains=${filter}&_limit=${perPage}&_start=${
-            page * perPage
-          }`
+          `https://api.spaceflightnewsapi.net/v3/articles?title_contains=${filter.replaceAll(
+            " ",
+            "+"
+          )}&_limit=${perPage}&_start=${page * perPage}`
         );
-        console.log(response);
         const matchedDescription = await axios.get(
-          `https://api.spaceflightnewsapi.net/v3/articles?summary_contains=${filter}&_limit=${perPage}&_start=${
-            page * perPage
-          }`
+          `https://api.spaceflightnewsapi.net/v3/articles?summary_contains=${filter.replaceAll(
+            " ",
+            "+"
+          )}&_limit=${perPage}&_start=${page * perPage}`
         );
-
-        const filteredResult = [
-          ...response.data,
-          ...matchedDescription.data,
-        ].filter((el, i, arr) => arr.indexOf(el) === i);
-
-        return filteredResult;
+        const filteredResult = matchedDescription.data.filter(
+          (el: ArticleInterface) => {
+            return !response.data.find(
+              (article: ArticleInterface) => article.id === el.id
+            );
+          }
+        );
+        return [...response.data, ...filteredResult];
       } catch (e) {
         if (e instanceof Error) {
           return thunkAPI.rejectWithValue(e.message);
