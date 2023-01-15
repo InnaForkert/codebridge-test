@@ -7,6 +7,8 @@ import { CardContent, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import EastIcon from "@mui/icons-material/East";
+import Highlighter from "react-highlight-words";
+import { useAppSelector } from "../state/utils/hooks";
 
 function Article({
   data: { publishedAt, title, summary, imageUrl, id },
@@ -14,6 +16,7 @@ function Article({
   data: ArticleInterface;
 }) {
   const themeType = useTheme();
+  const filter = useAppSelector((state) => state.filter);
   const formatedDate = format(new Date(publishedAt), "PPP");
   const formattedSummary = formatSummary();
 
@@ -59,9 +62,19 @@ function Article({
           mb={"20px"}
           sx={{ lineHeight: 1.2 }}
         >
-          {title}
+          <Highlighter
+            searchWords={filter.split(" ")}
+            autoEscape={true}
+            textToHighlight={title}
+          />
         </Typography>
-        <Typography>{formattedSummary}</Typography>
+        <Typography>
+          <Highlighter
+            searchWords={filter.split(" ")}
+            autoEscape={true}
+            textToHighlight={formattedSummary}
+          />
+        </Typography>
         <Typography
           component={Link}
           to={`/article/${id}`}
