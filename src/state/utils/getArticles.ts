@@ -6,7 +6,7 @@ export const fetchArticles = createAsyncThunk(
   "articles/fetch",
   async (params: { filter: string; page: number }, thunkAPI) => {
     const { filter, page } = params;
-    const perPage = 12;
+    const perPage = 6;
     if (filter) {
       try {
         const response = await axios.get(

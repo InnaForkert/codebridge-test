@@ -1,5 +1,5 @@
 export interface ArticlesStateInterface {
-  articles?: ArticleInterface[];
+  articles: ArticleInterface[];
   isLoading: boolean;
   error: unknown;
 }

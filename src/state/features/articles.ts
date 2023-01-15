@@ -11,7 +11,11 @@ const initialState: ArticlesStateInterface = {
 export const articlesSlice = createSlice({
   name: "articles",
   initialState,
-  reducers: {},
+  reducers: {
+    clearArticles(state) {
+      state.articles = [];
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchArticles.pending, (state) => {
       state.isLoading = true;
@@ -19,7 +23,9 @@ export const articlesSlice = createSlice({
     builder.addCase(fetchArticles.fulfilled, (state, action) => {
       state.isLoading = false;
       state.error = null;
-      state.articles = action.payload;
+      if (action.payload) {
+        state.articles = [...state.articles, ...action.payload];
+      }
     });
     builder.addCase(fetchArticles.rejected, (state, action) => {
       state.isLoading = false;
@@ -28,6 +34,6 @@ export const articlesSlice = createSlice({
   },
 });
 
-// export const {} = articlesSlice.actions;
+export const { clearArticles } = articlesSlice.actions;
 
 export const articlesReducer = articlesSlice.reducer;

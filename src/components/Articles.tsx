@@ -9,6 +9,7 @@ import Divider from "@mui/material/Divider";
 import { Typography } from "@mui/material";
 import { useFetchCount } from "../hooks/useFetchCount";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { clearArticles } from "../state/features/articles";
 
 function Articles() {
   const dispatch = useAppDispatch();
@@ -19,12 +20,18 @@ function Articles() {
   const { data: count } = useFetchCount(
     "https://api.spaceflightnewsapi.net/v3/articles/count"
   );
-  const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
+
+  const hasMore = count - page * 12 > 0;
 
   useEffect(() => {
     dispatch(fetchArticles({ filter: filter, page: page }));
   }, [dispatch, filter, page]);
+
+  useEffect(() => {
+    setPage(1);
+    dispatch(clearArticles());
+  }, [dispatch, filter]);
 
   return (
     <>
@@ -35,10 +42,14 @@ function Articles() {
       {isError && <p>Oops! Something went wrong! 🤔</p>}
       {isLoading && <p>Loading...</p>}
       <InfiniteScroll
-        next={() => setPage((prev) => prev + 1)}
+        next={() => {
+          setPage((prev) => prev + 1);
+          console.log(1, page);
+        }}
         hasMore={hasMore}
         loader={<h4>Loading...</h4>}
-        dataLength={count}
+        dataLength={articles.length}
+        endMessage={<p>Sorry, no more news 😥</p>}
       >
         <Grid
           container
@@ -59,25 +70,3 @@ function Articles() {
 }
 
 export default Articles;
-
-// <InfiniteScroll
-//   dataLength={items.length} //This is important field to render the next data
-//   next={fetchData}
-//   hasMore={true}
-//   loader={<h4>Loading...</h4>}
-//   endMessage={
-//     <p style={{ textAlign: "center" }}>
-//       <b>Yay! You have seen it all</b>
-//     </p>
-//   }
-//   // below props only if you need pull down functionality
-//   refreshFunction={this.refresh}
-//   pullDownToRefresh
-//   pullDownToRefreshThreshold={50}
-//   pullDownToRefreshContent={
-//     <h3 style={{ textAlign: "center" }}>&#8595; Pull down to refresh</h3>
-//   }
-//   releaseToRefreshContent={
-//     <h3 style={{ textAlign: "center" }}>&#8593; Release to refresh</h3>
-//   }
-// ></InfiniteScroll>;
