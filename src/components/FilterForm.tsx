@@ -25,7 +25,7 @@ function FilterForm() {
           onChange={(e) => handleInput(e)}
           value={filterValue}
           startAdornment={<SearchIcon />}
-          placeholder="The most successful IT companies in 2020"
+          placeholder="Space is cool"
           sx={{
             width: "600px",
             boxShadow: "0px 8px 24px rgba(0, 0, 0, 0.05)",
