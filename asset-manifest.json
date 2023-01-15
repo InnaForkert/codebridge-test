@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/codebridge-test/static/css/main.fc29eb2c.css",
+    "main.js": "/codebridge-test/static/js/main.70182dce.js",
+    "static/js/973.0644f333.chunk.js": "/codebridge-test/static/js/973.0644f333.chunk.js",
+    "static/js/811.0b588d4d.chunk.js": "/codebridge-test/static/js/811.0b588d4d.chunk.js",
+    "static/js/481.c033a7d5.chunk.js": "/codebridge-test/static/js/481.c033a7d5.chunk.js",
+    "static/js/988.a510baa8.chunk.js": "/codebridge-test/static/js/988.a510baa8.chunk.js",
+    "index.html": "/codebridge-test/index.html",
+    "main.fc29eb2c.css.map": "/codebridge-test/static/css/main.fc29eb2c.css.map",
+    "main.70182dce.js.map": "/codebridge-test/static/js/main.70182dce.js.map",
+    "973.0644f333.chunk.js.map": "/codebridge-test/static/js/973.0644f333.chunk.js.map",
+    "811.0b588d4d.chunk.js.map": "/codebridge-test/static/js/811.0b588d4d.chunk.js.map",
+    "481.c033a7d5.chunk.js.map": "/codebridge-test/static/js/481.c033a7d5.chunk.js.map",
+    "988.a510baa8.chunk.js.map": "/codebridge-test/static/js/988.a510baa8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fc29eb2c.css",
+    "static/js/main.70182dce.js"
+  ]
+}
