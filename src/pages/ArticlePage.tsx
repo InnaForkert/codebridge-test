@@ -1,9 +1,7 @@
 import { Card, Typography } from "@mui/material";
-import { Container } from "@mui/system";
 import { Link, useParams } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 import Image from "mui-image";
-import { id } from "date-fns/locale";
 import WestIcon from "@mui/icons-material/West";
 
 function Article() {

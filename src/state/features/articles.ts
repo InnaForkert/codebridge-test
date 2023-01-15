@@ -3,9 +3,7 @@ import { fetchArticles } from "../utils/getArticles";
 import { ArticlesStateInterface } from "../../interfaces/interfaces";
 
 const initialState: ArticlesStateInterface = {
-  articles: {
-    data: [],
-  },
+  articles: [],
   isLoading: false,
   error: null,
 };
