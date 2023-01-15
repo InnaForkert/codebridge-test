@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <Provider store={store}>
-    <HashRouter basename="codebridge-test">
+    <HashRouter>
       <ThemeProvider theme={theme}>
         <App />
       </ThemeProvider>
