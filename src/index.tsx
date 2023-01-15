@@ -13,9 +13,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <Provider store={store}>
-    <BrowserRouter
-    // basename="codebridge-test"
-    >
+    <BrowserRouter basename="codebridge-test">
       <ThemeProvider theme={theme}>
         <App />
       </ThemeProvider>
