@@ -4,15 +4,21 @@ import { ArticleInterface } from "../../interfaces/interfaces";
 
 export const fetchArticles = createAsyncThunk(
   "articles/fetch",
-  async (filter: string, thunkAPI) => {
+  async (params: { filter: string; page: number }, thunkAPI) => {
+    const { filter, page } = params;
+    const perPage = 12;
     if (filter) {
       try {
         const response = await axios.get(
-          `https://api.spaceflightnewsapi.net/v3/articles?title_contains=${filter}`
+          `https://api.spaceflightnewsapi.net/v3/articles?title_contains=${filter}&_limit=${perPage}&_start=${
+            page * perPage
+          }`
         );
         console.log(response);
         const matchedDescription = await axios.get(
-          `https://api.spaceflightnewsapi.net/v3/articles?summary_contains=${filter}`
+          `https://api.spaceflightnewsapi.net/v3/articles?summary_contains=${filter}&_limit=${perPage}&_start=${
+            page * perPage
+          }`
         );
 
         const filteredResult = [
@@ -30,7 +36,9 @@ export const fetchArticles = createAsyncThunk(
     }
     try {
       const response = await axios.get(
-        "https://api.spaceflightnewsapi.net/v3/articles"
+        `https://api.spaceflightnewsapi.net/v3/articles?_limit=${perPage}&_start=${
+          page * perPage
+        }`
       );
       const data: ArticleInterface[] = response.data;
       return data;
